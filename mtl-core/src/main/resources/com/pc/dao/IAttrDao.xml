@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pc.dao.IAttrDao">
+	<resultMap type="AttrType" id="BaseResult">
+		<id property="attrTypeId" column="attr_type_id" javaType="Integer"/>
+		<result property="attrTypeName" column="attr_type_name" javaType="String"/>
+		<result property="attrPage" column="attr_page" javaType="String"/>
+	</resultMap>
+	<resultMap type="AttrInfo" id="BaseResult1">
+		<id property="attrId" column="attr_id" javaType="Integer"/>
+		<result property="attrName" column="attr_name" javaType="String"/>
+		<result property="attrDes" column="attr_des" javaType="String"/>
+		<result property="bak1" column="bak1" javaType="String"/>
+	</resultMap>
+	<select id="selectAttrTypeList" resultMap="BaseResult">
+		select * from tb_attr_type 
+	</select>
+	<select id="selectAttrInfoList" resultMap="BaseResult1">
+		select * from tb_attr_info 
+	</select>
+</mapper>

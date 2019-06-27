@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pc.dao.IUserDao">
+	<resultMap type="User" id="BaseResult">
+		<id column="user_id" property="userId" javaType="Integer"/>
+		<result column="user_name" property="userName" javaType="string"/>
+		<result column="user_password" property="password" javaType="string"/>
+		<result column="user_phone" property="userPhone" javaType="string"/>
+		<result column="user_email" property="userEmail" javaType="string"/>
+		<result column="image_id" property="imageId" javaType="Integer"/>
+		<result column="user_type" property="userType" javaType="string"/>
+		<result column="user_alias" property="userAlias" javaType="string"/>
+		<result column="bak1" property="bak1" javaType="string"/>
+	</resultMap>
+	<select id="selectUser" resultMap="BaseResult">
+		select * from tb_user where user_name=#{userName} and user_password=#{password}
+	</select>
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pc.dao.IPriceDao">
+	<resultMap type="ProductAttrDiscount" id="BaseResult">
+		<id property="discountId" column="discount_id" javaType="int"/>
+		<result property="productId" column="product_id" javaType="int"/>
+		<result property="attrId" column="attr_id" javaType="int"/>
+		<result property="discountPrice" column="discount_price" javaType="string"/>
+		<result property="discountDesc" column="discount_desc" javaType="string"/>
+	</resultMap>
+	<select id="calculatePrice" parameterType="Integer[]" resultType="Integer">
+		select sum(discount_price) from tb_product_attr_discount
+			<where>
+				<foreach collection="array" open="attr_id in(" close=");" separator="," item="ids">
+					#{ids}
+				</foreach>
+			</where>
+	</select>
+</mapper>

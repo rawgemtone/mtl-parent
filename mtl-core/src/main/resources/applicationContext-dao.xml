@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+				http://www.springframework.org/schema/beans 
+				http://www.springframework.org/schema/beans/spring-beans.xsd
+				http://www.springframework.org/schema/aop
+				http://www.springframework.org/schema/aop/spring-aop.xsd
+				http://www.springframework.org/schema/context
+				http://www.springframework.org/schema/context/spring-context.xsd
+				http://www.springframework.org/schema/tx
+				http://www.springframework.org/schema/tx/spring-tx.xsd
+				">
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 
+			1,将com.qzw.dao包中的接口实例成对象,存储到Spring容器
+			2,将对应的映射文件也加载到Spring容器
+			MapperScannerConfigurer需要设置sqlSessionFactory,会自动扫描Spring容器
+		 -->
+		<property name="basePackage" value="com.pc.dao"></property>
+	</bean>
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 
+			configLocation:mybatis的核心配置文件
+		 -->
+		<property name="configLocation" value="classpath:/sqlMapConfig.xml"></property>
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<context:property-placeholder location="classpath:/c3p0.properties"/>
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${c3p0.driverClass}"></property>
+		<property name="jdbcUrl" value="${c3p0.jdbcUrl}"></property>
+		<property name="user" value="${c3p0.user}"></property>
+		<property name="password" value="${c3p0.password}"></property>
+	</bean>
+
+
+</beans> 
